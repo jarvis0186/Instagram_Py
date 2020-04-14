@@ -58,8 +58,6 @@ def addFollowers(config):
                         driver.back()
                 except:
                     driver.back()
-            else:
-                continue
             count+=1
             temp+=1
         except: 
