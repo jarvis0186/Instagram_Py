@@ -18,12 +18,14 @@ def main():
     insta_obj = instaloader.Instaloader()
 
     insta_obj.login(config["username"], config["password"])
+    print("Yay login success")
+    profile = instaloader.Profile.from_username(insta_obj.context, config["username"])
 
-    profile = instaloader.Profile.from_username(insta_obj.context, "bikers_and_trippers")
-
+    print("Got profile")
     followers = profile.get_followers()
+    print("YAY got followers")
     followees = profile.get_followees()
-
+    print("YAY got followees")
 #--------------------------------------------------------------------- GET FOLLOWERS LIST -----------------------------------------------------------------------------------------------------------------------------------------
     for i in followers:
         followers_list.append(i)
@@ -40,6 +42,11 @@ def main():
         else:
             not_followers_list.append(profile_username)
 
+
+    print(len(followers_list))
+    print(len(following_list))
+    print(len(not_followers_list))
+
     # f = open("not_follwers_list.txt", "r")
     # string_useless = f.read()
     # not_followers_list = string_useless.split("\n")
@@ -50,15 +57,26 @@ def main():
     driver = login_prof.login_profile(config)
 
     unfollow_count = 0
+    total_unfollow_count = 40
+    if(len(not_followers_list)< total_unfollow_count):
+        total_unfollow_count = len(not_followers_list)
+     
     for i in not_followers_list:
         if i in exception_list:
             pass
+        elif(unfollow_count == total_unfollow_count):
+            break
         else:
             unfollow_profile.unfollow_profiles(i, config, driver)
             unfollow_count+=1
-            if(unfollow_count == 10):
-                time.sleep(600) #Sleep for 10 minutes if you have unfollowed 10 people
+            if(unfollow_count % 8 == 0):
+                print("Deleting cookies...")
+                # driver.delete_all_cookies()
+                print("Cookies Deleted...\nRe-Login... Beta mode, this may not work!!")
+                # driver.get(config["url"])
 
+                time.sleep(300) #Sleep for 10 minutes if you have unfollowed 10 people
 
+    driver.close()
 if __name__ == "__main__":
     main()

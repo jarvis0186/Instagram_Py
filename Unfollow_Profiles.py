@@ -37,6 +37,7 @@ class unfollow:
 
         search_bar.clear()
         search_bar.send_keys(profile_name) #types in the user name
+        time.sleep(2)
         # ---------------------------------------------------------------------------- Checks if that user profile is present! ----------------------------------------------------------------------------------------
         try:
             element = WebDriverWait(driver, 25).until(
@@ -46,7 +47,7 @@ class unfollow:
             print("WebDriverWait timed out: couldn't find user profile" )
 
         driver.find_element_by_xpath("//*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]/div").click() #Clicks the particular user profile.
-
+        time.sleep(2)
         #----------------------------------------------------------------------------- Checks if we are following that user profiles -----------------------------------------------------------------------------------
         try:
             element = WebDriverWait(driver, 5).until(
@@ -57,7 +58,7 @@ class unfollow:
 
         except:
             print("We do not follow : " + profile_name)
-            
+        time.sleep(2)
         #-------------------------------------------------------------------------------- Goes to the home page to get one with the next user! ----------------------------------------------------------------------
         try:
             element = WebDriverWait(driver, 5).until(

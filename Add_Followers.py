@@ -11,6 +11,7 @@ from setup_login import *
 
 def addFollowers(config):
 
+    total_no_of_followers = int(input("Enter the number of followers you wish to follow: "))
     login_prof = login()
     driver = login_prof.login_profile(config)
 
@@ -29,7 +30,7 @@ def addFollowers(config):
     time.sleep(1)
 
     count = temp = 0
-    while(count!=10):
+    while(count!=total_no_of_followers):
         try:
             element = WebDriverWait(driver, 4).until(
                 EC.presence_of_element_located((By.XPATH,"//*[@id=\"react-root\"]/section/main/div/div[2]/div/div/div["+str(count+1)+"]/div[3]/button" )) 
