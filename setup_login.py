@@ -9,13 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class login:
 
-    def setup_driver(self, config):
-        driver = webdriver.Chrome(config["driver_path"])
-        driver.get(config["url"])
-        return driver
-
-    def login_profile(self, config):
-        driver = self.setup_driver(config)
+    def login_profile(self, config, driver):
         
         try:
             element = WebDriverWait(driver, 25).until(

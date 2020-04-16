@@ -4,6 +4,7 @@ import time
 from Unfollow_Profiles import *
 from setup_login import *
 from read_config import *
+from setup_driver import *
 
 def main():
     followers_list = []
@@ -51,13 +52,15 @@ def main():
     # string_useless = f.read()
     # not_followers_list = string_useless.split("\n")
     
+    setupDriver = setup_driver() #Creating instances
     login_prof = login()
+    driver = setupDriver.setup_driver(config) #Initializes driver.
+
+    driver = login_prof.login_profile(config, driver) #Logs into profile
     unfollow_profile = unfollow()
 
-    driver = login_prof.login_profile(config)
-
     unfollow_count = 0
-    total_unfollow_count = 40
+    total_unfollow_count = 60
     if(len(not_followers_list)< total_unfollow_count):
         total_unfollow_count = len(not_followers_list)
      
@@ -75,7 +78,7 @@ def main():
                 print("Cookies Deleted...\nRe-Login... Beta mode, this may not work!!")
                 # driver.get(config["url"])
 
-                time.sleep(300) #Sleep for 10 minutes if you have unfollowed 10 people
+                time.sleep(200) #Sleep for 5 minutes if you have unfollowed 10 people
 
     driver.close()
 if __name__ == "__main__":
