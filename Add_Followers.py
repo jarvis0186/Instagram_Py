@@ -77,27 +77,40 @@ def addFollowers(config):
             driver.find_element_by_xpath("//*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]/div").click() #Clicks the particular user profile.
             time.sleep(2)
 
-            pic_to_click = random.randrange(1,3,1)
+            pic_to_click = 1 #random.randrange(1,3,1)
 
             print("Following people from picture number : " + str(pic_to_click)) 
-
             try:
-                element = WebDriverWait(driver, 25).until(
+                element = WebDriverWait(driver, 3).until(
                     EC.presence_of_element_located((By.XPATH, "//*[@id=\"react-root\"]/section/main/div/div[3]/article/div[1]/div/div[1]/div["+str(pic_to_click)+"]/a/div/div[2]"))
                 )
                 driver.find_element_by_xpath("//*[@id=\"react-root\"]/section/main/div/div[3]/article/div[1]/div/div[1]/div["+str(pic_to_click)+"]/a/div/div[2]").click()
+                
             except:
-                print("Cannot click photo number : " + str(pic_to_click) + " of profile: "+ profile_name)
+                try:
+                    element = WebDriverWait(driver, 3).until(
+                        EC.presence_of_element_located((By.XPATH, "//*[@id=\"react-root\"]/section/main/div/div[2]/article/div[1]/div/div[1]/div["+str(pic_to_click)+"]/a/div/div[2]"))
+                    )
+                    driver.find_element_by_xpath("//*[@id=\"react-root\"]/section/main/div/div[2]/article/div[1]/div/div[1]/div["+str(pic_to_click)+"]/a/div/div[2]").click()
+                except:
+                    print("Cannot click photo number : " + str(pic_to_click) + " of profile: "+ profile_name)
 
             time.sleep(2)
-
+            #---------------------------------------------------------The pic might either have common likes or might be a brand new profile. so the position of the like button matters-------------------------------
             try:
-                element = WebDriverWait(driver, 25).until(
+                element = WebDriverWait(driver, 5).until(
                     EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/div[2]/div/article/div[2]/section[2]/div/div[2]/button"))
                 )
                 driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[2]/section[2]/div/div[2]/button").click()
+                                            
             except:
-                print("Cannot open the likes of this picture")
+                try:
+                    element = WebDriverWait(driver, 5).until(
+                        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/div[2]/div/article/div[2]/section[2]/div/div/button"))
+                    )
+                    driver.find_element_by_xpath("/html/body/div[4]/div[2]/div/article/div[2]/section[2]/div/div/button").click()
+                except:
+                    print("Cannot open the likes of this picture")
             while(total_tries<=total_no_of_followers):
                 if(total_tries%10 == 0):
                     print("Followed upto 10 profiles so taking a nap for 5 minutes...")

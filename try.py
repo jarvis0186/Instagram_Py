@@ -1,3 +1,11 @@
-import random
+import configparser
+import json
 
-print(random.randrange(1,6))
+config = configparser.ConfigParser()
+try:
+    config.read(".\\config.ini")
+    config_default = config["DEFAULT"]
+    js_string = json.loads(config_default["js_string"])
+    print(js_string["a"])
+except:
+    print( "Error reading the config file. Please check if the Environment variable ENV_MODE is set" )
