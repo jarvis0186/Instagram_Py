@@ -1,2 +1,2 @@
-./Config/*.ini
+/**/Config/*.ini
 */chromedriver
