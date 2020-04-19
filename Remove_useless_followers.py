@@ -60,8 +60,8 @@ def main():
     driver = login_prof.login_profile(config, driver) #Logs into profile
     unfollow_profile = unfollow()
 
-    unfollow_count = 0
-    total_unfollow_count = 60
+    unfollow_count = temp = 0
+    total_unfollow_count = 40
     if(len(not_followers_list)< total_unfollow_count):
         total_unfollow_count = len(not_followers_list)
     Notification_Flag=False #Checks for the notification pop up
@@ -73,12 +73,14 @@ def main():
         else:
             unfollow_profile.unfollow_profiles(i, config, driver, Notification_Flag)
             unfollow_count+=1
-            if(unfollow_count == total_unfollow_count//2):
+            temp+=1
+            if(temp == total_unfollow_count//3):
                 print("Deleting cookies...")
                 driver.delete_all_cookies()
                 print("Cookies Deleted...\nRe-Login... Beta mode, this may not work!!")
                 driver.get(config["url"])
                 driver = login_prof.login_profile(config, driver)
+                temp=0
                 
             if(unfollow_count % 8 == 0):
                 t = 600
