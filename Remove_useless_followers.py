@@ -61,7 +61,7 @@ def main():
     unfollow_profile = unfollow()
 
     unfollow_count = temp = 0
-    total_unfollow_count = 40
+    total_unfollow_count = 120
     if(len(not_followers_list)< total_unfollow_count):
         total_unfollow_count = len(not_followers_list)
     Notification_Flag=False #Checks for the notification pop up
