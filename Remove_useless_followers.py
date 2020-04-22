@@ -61,7 +61,7 @@ def main():
     unfollow_profile = unfollow()
 
     unfollow_count = temp = 0
-    total_unfollow_count = 120
+    total_unfollow_count = 140
     if(len(not_followers_list)< total_unfollow_count):
         total_unfollow_count = len(not_followers_list)
     Notification_Flag=False #Checks for the notification pop up
@@ -84,7 +84,7 @@ def main():
                 
             if(unfollow_count % 8 == 0):
                 t = 600
-                print("Unfollowed about 8 people...Sleeping for "+ str(t) + " seconds")
+                print("Unfollowed about 8 people...Sleeping for "+ str(t) + " seconds and number of users unfollowed until now are: " + str(unfollow_count) )
                 while t:
                     mins, secs = divmod(t, 60)
                     timeformat = '{:02d}:{:02d}'.format(mins, secs)
