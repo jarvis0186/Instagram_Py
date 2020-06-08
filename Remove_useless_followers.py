@@ -17,7 +17,6 @@ def main():
     exception_list = open("Exceptions_list.txt", "r").read().split("\n")
 
     insta_obj = instaloader.Instaloader()
-
     insta_obj.login(config["username"], config["password"])
     print("Yay login success")
     profile = instaloader.Profile.from_username(insta_obj.context, config["username"])
@@ -61,9 +60,8 @@ def main():
     unfollow_profile = unfollow()
 
     unfollow_count = temp = 0
-    total_unfollow_count = 140
-    if(len(not_followers_list)< total_unfollow_count):
-        total_unfollow_count = len(not_followers_list)
+    total_unfollow_count = len(not_followers_list)
+    print("The total unfollow count is --> " + str(unfollow_count))
     Notification_Flag=False #Checks for the notification pop up
     for i in not_followers_list[::-1]:
         if i in exception_list:

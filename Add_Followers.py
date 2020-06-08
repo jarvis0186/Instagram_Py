@@ -113,8 +113,8 @@ def addFollowers(config):
                     print("Cannot open the likes of this picture")
             while(total_tries<=total_no_of_followers):
                 if(total_tries%10 == 0):
-                    print("Followed upto 10 profiles so taking a nap for 5 minutes...")
-                    t=300
+                    t=150
+                    print("Followed upto 10 profiles so taking a nap for "+str(t)+" seconds...")
                     while t:
                         mins, secs = divmod(t, 60)
                         timeformat = '{:02d}:{:02d}'.format(mins, secs)
@@ -170,14 +170,14 @@ def addFollowers(config):
 
             count = 1
             
-            while(count<=total_no_of_followers):
+            while(count<total_no_of_followers):
                 try:
                     element = WebDriverWait(driver, 4).until(
                         EC.presence_of_element_located((By.XPATH,"//*[@id=\"react-root\"]/section/main/div/div[2]/div/div/div["+str(count)+"]/div[3]/button" )) #Checks if a new person is there to follow
                     )
                     if(count%10 == 0):
-                        print("Followed upto 10 profiles so taking a nap for 5 minutes...")
-                        t=300
+                        t=150
+                        print("Followed upto 10 profiles so taking a nap for "+str(t)+" seconds...")
                         while t:
                             mins, secs = divmod(t, 60)
                             timeformat = '{:02d}:{:02d}'.format(mins, secs)

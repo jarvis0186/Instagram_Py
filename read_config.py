@@ -5,7 +5,7 @@ class config_ini:
     def read_config(self):
         config = configparser.ConfigParser()
         try:
-            config.read(".\\Config\\config-B&T.ini")
+            config.read(".\\Config\\config-AM.ini")
             config_default = config["DEFAULT"]
             print( "Reading config successful")
             return config_default
